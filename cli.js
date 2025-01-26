@@ -1,9 +1,9 @@
 const fs = require('fs-extra');  //To managing File System
 const path = require('path');  //To handle file and paths
-const { command } = require('command');  //To handle CLI arguments
+const { Command } = require('commander');  //To handle CLI arguments
 const { PassThrough } = require('stream');
 
-const program = new command;  //new command line program
+const program = new Command;  //new command line program
 
 program
     .command('Create <appname>')
@@ -29,7 +29,7 @@ program
             name: appname,  //Project Name
             version: '1.0.0.0',  //Version
             main: 'app.js',  //Entry Point file
-            dependecies: {
+            dependencies: {
                 express: '^4.17.1',  //Express is the Primary dependency
             }
         };
@@ -56,7 +56,7 @@ program
 
         //Start the server on Port 3000
         app.listen(port, function(){
-            console.log("Server started on https://localhost:3000");
+            console.log("Server started on http://localhost:3000");
         });`;
 
         //Write the app.js file to the project folder
@@ -65,11 +65,11 @@ program
         //Creating routes for handling requests
 
         //Create routes for the Homepage (Index route)
-        const routesIndex = `const express =requie('express');
+        const routesIndex = `const express =require('express');
         const router=express.Router();
         
         //Handle GET requests to the rooot URL
-        route.get('/', function(req, res){
+        router.get('/', function(req, res){
           res.render('index');  //Render index.ejs view
          });
          
@@ -116,7 +116,7 @@ program
         fs.writeFileSync(path.join(appDir, 'public/stylesheets/style.css'), styleCSS);
 
         //Create the bin floder and a basic www file for server starting
-        const binFIle = '#!/usr/bin/env node 
+        const binFile = `#!/usr/bin/env node 
 
         const app = require('../app'); // Import app.js
         const http = require('http');
@@ -144,10 +144,20 @@ program
 
         //Write the www file to the bin folder to make it executed
         fs.writeFileSync(path.join(appDir, 'bin/www'), binFile);
-        fs.chmodSync(path.join(appDir, 'bin/www'), 0o755);  //Give execution permisiion
+
+        // Apply execution permission only on Unix-like systems (Linux/macOS)
+        if (os.platform() !== 'win32') {
+            fs.chmodSync(path.join(appDir, 'bin/www'), 0o755); // Give execution permission on Linux/macOS
+        }
 
         //Success
-        console.log('Scaffolding for "${appname}" is done successfully.`);
+        console.log(`Scaffolding for "${appname}" is done successfully.`);
+        console.log('Next steps:');
+        console.log(`cd ${appname}`);
+        console.log('npm install');
+        console.log('npm start');
+
+
     });
 
 //Parsing the CLI arguments
