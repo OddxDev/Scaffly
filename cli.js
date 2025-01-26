@@ -149,3 +149,6 @@ program
         //Success
         console.log('Scaffolding for "${appname}" is done successfully.`);
     });
+
+//Parsing the CLI arguments
+program.parse(process.argv);
