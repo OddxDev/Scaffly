@@ -115,4 +115,31 @@ program
         //Write the CSS file to the public/stylesheets folder
         fs.writeFileSync(path.join(appDir, 'public/stylesheets/style.css'), styleCSS);
 
+        //Create the bin floder and a basic www file for server starting
+        const binFIle = '#!/usr/bin/env node
+
+        const app = require('../app'); // Import app.js
+        const http = require('http');
+        const debug = require('debug')('app:server');
+
+        // Normalize the port to be a number or false
+        const port = normalizePort(process.env.PORT || '3000');
+        app.set('port', port);
+
+        // Create the HTTP server using Express app
+        const server = http.createServer(app);
+
+        // Start the server and log the URL
+        server.listen(port, function() {
+        console.log('Server started on http://localhost:' + port);
+        });
+
+        // Function to normalize the port
+        function normalizePort(val) {
+        const port = parseInt(val, 10);
+        if (isNaN(port)) return val; // If not a number, return the value as-it-is
+        if (port >= 0) return port; // If it is a valid port, return it
+        return false; // If it is a invalid port, return false
+        }`;
+
         
