@@ -32,3 +32,8 @@ program
             express: '^4.17.1',  //Express is the Primary dependency
         }
       };
+      
+      //Writing package.json to the project folder
+      fs.writeJSONSync(path.join(appDir, 'package.json'), packageJson);
+
+      
