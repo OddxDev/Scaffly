@@ -111,4 +111,8 @@ program
         margin:0px;
         padding:0px;
         }`;
+
+        //Write the CSS file to the public/stylesheets folder
+        fs.writeFileSync(path.join(appDir, 'public/stylesheets/style.css'), styleCSS);
+
         
