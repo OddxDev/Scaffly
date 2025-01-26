@@ -57,3 +57,8 @@ program
         app.listen(port, function(){
             console.log("Server started on https://localhost:3000");
         });`;
+
+            //Write the app.js file to the project folder
+            fs.writeFileSync(path.join(appDir, 'app.js'), appJs);
+
+            
