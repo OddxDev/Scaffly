@@ -142,4 +142,8 @@ program
         return false; // If it is a invalid port, return false
         }`;
 
+        //Write the www file to the bin folder to make it executed
+        fs.writeFileSync(path.join(appDir, 'bin/www'), binFile);
+        fs.chmodSync(path.join(appDir, 'bin/www'), 0o755);  //GIve execution permisiion
+
         
