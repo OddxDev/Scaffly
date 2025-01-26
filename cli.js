@@ -105,4 +105,10 @@ program
 
         //Write the index.ejs file to the views folder
         fs.writeFileSync(path.join(appDir, 'views/index.ejs'), indexEJS);
+
+        //Create the stylesheets folder and a default css file with a universal selector(*)
+        const styleCSS= `*{
+        margin:0px;
+        padding:0px;
+        }`;
         
