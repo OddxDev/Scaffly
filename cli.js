@@ -22,3 +22,13 @@ program
       ];
 
       dirs.forEach((dir)=> fs.ensureDirSync(path.join(appDir, dir)));  //Create all directories
+
+      //Create package.json file 
+      const packageJson = {
+        name:appname,  //Project Name
+        version: '1.0.0.0',  //Version
+        main: 'app.js',  //Entry Point file
+        dependecies:{
+            express: '^4.17.1',  //Express is the Primary dependency
+        }
+      };
