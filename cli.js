@@ -83,4 +83,10 @@ program
          res.send('Users Route');  // User route simple response
          });
 
-         module.exports=router;
+         module.exports=router;`
+
+         //Writing the routes file to the route folder
+         fs.writeFileSync(path.join(appDir, 'routes/index.js'), routesIndex);
+         fs.writeFileSync(path.join(appDir, 'routes/users.js'), routesUsers);
+
+         
