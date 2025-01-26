@@ -20,3 +20,5 @@ program
         'routes',  //Route Handling files
         'views',  //View Tamplates(EJS files)
       ];
+
+      dirs.forEach((dir)=> fs.ensureDirSync(path.join(appDir, dir)));  //Create all directories
