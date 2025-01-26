@@ -58,7 +58,7 @@ program
             console.log("Server started on https://localhost:3000");
         });`;
 
-            //Write the app.js file to the project folder
-            fs.writeFileSync(path.join(appDir, 'app.js'), appJs);
+        //Write the app.js file to the project folder
+        fs.writeFileSync(path.join(appDir, 'app.js'), appJs);
 
-            
+        //Creating routes for handling requests
