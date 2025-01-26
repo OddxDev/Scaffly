@@ -74,8 +74,8 @@ program
          
          module.exports=router;`
 
-         //Create route for Users(Users route)
-         const routesUsers = `const express =require('express');
+        //Create route for Users(Users route)
+        const routesUsers = `const express =require('express');
          const router=express.Router();
 
          //Handle GET request to '/users'
@@ -85,8 +85,20 @@ program
 
          module.exports=router;`
 
-         //Writing the routes file to the route folder
-         fs.writeFileSync(path.join(appDir, 'routes/index.js'), routesIndex);
-         fs.writeFileSync(path.join(appDir, 'routes/users.js'), routesUsers);
+        //Writing the routes file to the route folder
+        fs.writeFileSync(path.join(appDir, 'routes/index.js'), routesIndex);
+        fs.writeFileSync(path.join(appDir, 'routes/users.js'), routesUsers);
 
-         
+        //Creating views folder with a basic index.ejs file with basic HTML boilerplate code
+        const indexEJS = `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome</title>
+        </head>
+        <body>
+        <h1>Hello World</h1>
+        </body>
+        </html>`;
+        
