@@ -63,7 +63,7 @@ program
 
         //Creating routes for handling requests
 
-        //Create routes for the homepage (index route)
+        //Create routes for the Homepage (Index route)
         const routesIndex = `const express =requie('express');
         const router=express.Router();
         
@@ -74,4 +74,13 @@ program
          
          module.exports=router;`
 
-         
+         //Create route for Users(Users route)
+         const routesUsers = `const express =require('express');
+         const router=express.Router();
+
+         //Handle GET request to '/users'
+         router.get('/', function(req, res){
+         res.send('Users Route');  // User route simple response
+         });
+
+         module.exports=router;
