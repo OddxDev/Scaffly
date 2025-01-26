@@ -1,6 +1,7 @@
 const fs = require('fs-extra');  //To managing File System
 const path = require('path');  //To handle file and paths
 const { command } = require('command');  //To handle CLI arguments
+const { PassThrough } = require('stream');
 
 const program = new command;  //new command line program
 
@@ -101,4 +102,7 @@ program
         <h1>Hello World</h1>
         </body>
         </html>`;
+
+        //Write the index.ejs file to the views folder
+        fs.writeFileSync(path.join(appDir, 'views/index.ejs'), indexEJS);
         
