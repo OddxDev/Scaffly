@@ -62,3 +62,16 @@ program
         fs.writeFileSync(path.join(appDir, 'app.js'), appJs);
 
         //Creating routes for handling requests
+
+        //Create routes for the homepage (index route)
+        const routesIndex = `const express =requie('express');
+        const router=express.Router();
+        
+        //Handle GET requests to the rooot URL
+        route.get('/', function(req, res){
+          res.render('index');  //Render index.ejs view
+         });
+         
+         module.exports=router;`
+
+         
