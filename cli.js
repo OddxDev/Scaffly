@@ -16,7 +16,7 @@ program
         const appDir = path.join(process.cwd(), appname);  //Project Directory Path Define
 
         //Ensure the the directory created
-        if(!fs.exitsSync(appDir))
+        if(!fs.existsSync(appDir))
         {
             fs.mkdirSync(appDir);
         }
