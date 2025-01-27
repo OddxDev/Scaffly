@@ -40,7 +40,7 @@ program
             version: '1.0.0.0',  //Version
             main: 'app.js',  //Entry Point file
             dependencies: {
-                express: '^4.17.1',  //Express is the Primary dependency
+                express: 'latest',  //Express is the Primary dependency
             }
         };
 
