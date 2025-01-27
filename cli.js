@@ -5,6 +5,7 @@ const fs = require('fs-extra');  //To managing File System
 const path = require('path');  //To handle file and paths
 const { Command } = require('commander');  //To handle CLI arguments
 const { PassThrough } = require('stream');
+const { execSync } = require('child_process');  //For executing commands like npm install
 
 const program = new Command;  //new command line program
 
@@ -38,7 +39,7 @@ program
         };
 
         //Writing package.json to the project folder
-        fs.writeJSONSync(path.join(appDir, 'package.json'), packageJson, {spaces:2});
+        fs.writeJSONSync(path.join(appDir, 'package.json'), packageJson, { spaces: 2 });
 
         //Create app.js file for ExpressJs setup
         const appJs = `
@@ -160,6 +161,18 @@ program
         // Apply execution permission only on Unix-like systems (Linux/macOS)
         // if (os.platform() !== 'win32') {
         fs.chmodSync(path.join(appDir, 'bin/www'), 0o755); // Give execution permission on Linux/macOS
+
+        // Now install dependencies of express
+        try 
+        {
+            console.log('Installing dependencies...');
+            execSync('npm install', { cwd: appDir, stdio: 'inherit' });
+            console.log('Dependencies installed successfully.');
+        } 
+        catch (error) 
+        {
+            console.error('Error installing dependencies:', error);
+        }
 
 
         //Success
