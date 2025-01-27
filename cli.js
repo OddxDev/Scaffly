@@ -13,7 +13,13 @@ program
     .command('Create <appname>')
     .option('--view <view>', 'view engine (default:ejs)', 'ejs')  //Default view engine is ejs
     .action(function (appname, options) { //Function to run when the command is executed        
-        const appDir = path.join(process.cwd(), appname); // //Project Directory Path Define
+        const appDir = path.join(process.cwd(), appname);  //Project Directory Path Define
+
+        //Ensure the the directory created
+        if(!fs.exitsSync(appDir))
+        {
+            fs.mkdirSync(appDir);
+        }
 
         //Required Directories Add
         const dirs =
@@ -40,6 +46,9 @@ program
 
         //Writing package.json to the project folder
         fs.writeJSONSync(path.join(appDir, 'package.json'), packageJson, { spaces: 2 });
+
+        //Install express dependency automatically
+        execSync('npm install', {cwd: appDir, stdio: 'inherit'});
 
         //Create app.js file for ExpressJs setup
         const appJs = `
@@ -162,24 +171,11 @@ program
         // if (os.platform() !== 'win32') {
         fs.chmodSync(path.join(appDir, 'bin/www'), 0o755); // Give execution permission on Linux/macOS
 
-        // Now install dependencies of express
-        try 
-        {
-            console.log('Installing dependencies...');
-            execSync('npm install', { cwd: appDir, stdio: 'inherit' });
-            console.log('Dependencies installed successfully.');
-        } 
-        catch (error) 
-        {
-            console.error('Error installing dependencies:', error);
-        }
-
 
         //Success
         console.log(`Scaffolding for "${appname}" is done successfully.`);
         console.log('Next steps:');
         console.log(`cd ${appname}`);
-        console.log('npm install');
         console.log('npm start');
 
 
