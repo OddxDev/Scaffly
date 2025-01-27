@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+
 const fs = require('fs-extra');  //To managing File System
 const path = require('path');  //To handle file and paths
 const { Command } = require('commander');  //To handle CLI arguments
@@ -35,10 +38,11 @@ program
         };
 
         //Writing package.json to the project folder
-        fs.writeJSONSync(path.join(appDir, 'package.json'), packageJson);
+        fs.writeJSONSync(path.join(appDir, 'package.json'), packageJson, {spaces:2});
 
         //Create app.js file for ExpressJs setup
-        const appJs = `const express= require('express');
+        const appJs = `
+        const express= require('express');
         const app= express();
         const path =require('path');
         const port= 3000;
@@ -57,7 +61,7 @@ program
         //Start the server on Port 3000
         app.listen(port, function(){
             console.log("Server started on http://localhost:3000");
-        });`;
+        }); `;
 
         //Write the app.js file to the project folder
         fs.writeFileSync(path.join(appDir, 'app.js'), appJs);
@@ -65,58 +69,66 @@ program
         //Creating routes for handling requests
 
         //Create routes for the Homepage (Index route)
-        const routesIndex = `const express =require('express');
+        const routesIndex = `
+        const express =require('express');
         const router=express.Router();
         
         //Handle GET requests to the rooot URL
         router.get('/', function(req, res){
-          res.render('index');  //Render index.ejs view
-         });
+            res.render('index');  //Render index.ejs view
+        });
          
-         module.exports=router;`
+        module.exports=router;`
 
         //Create route for Users(Users route)
-        const routesUsers = `const express =require('express');
-         const router=express.Router();
+        const routesUsers = `
+        const express =require('express');
+        const router=express.Router();
 
-         //Handle GET request to '/users'
-         router.get('/', function(req, res){
-         res.send('Users Route');  // User route simple response
-         });
+        //Handle GET request to '/users'
+        router.get('/', function(req, res){
+            res.send('Users Route');  // User route simple response
+        });
 
-         module.exports=router;`
+        module.exports=router;`
 
         //Writing the routes file to the route folder
         fs.writeFileSync(path.join(appDir, 'routes/index.js'), routesIndex);
         fs.writeFileSync(path.join(appDir, 'routes/users.js'), routesUsers);
 
         //Creating views folder with a basic index.ejs file with basic HTML boilerplate code
-        const indexEJS = `<!DOCTYPE html>
+        const indexEJS = `
+        <!DOCTYPE html>
         <html lang="en">
+
         <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Welcome</title>
         </head>
+
         <body>
-        <h1>Hello World</h1>
+            <h1>Hello World</h1>
         </body>
+
         </html>`;
 
         //Write the index.ejs file to the views folder
         fs.writeFileSync(path.join(appDir, 'views/index.ejs'), indexEJS);
 
         //Create the stylesheets folder and a default css file with a universal selector(*)
-        const styleCSS = `*{
-        margin:0px;
-        padding:0px;
+        const styleCSS = `
+        *{
+            margin:0px;
+            padding:0px;
         }`;
 
         //Write the CSS file to the public/stylesheets folder
         fs.writeFileSync(path.join(appDir, 'public/stylesheets/style.css'), styleCSS);
 
         //Create the bin floder and a basic www file for server starting
-        const binFile = `#!/usr/bin/env node 
+        const binFile = `
+        #!/usr/bin/env node 
 
         const app = require('../app'); // Import app.js
         const http = require('http');
@@ -146,9 +158,9 @@ program
         fs.writeFileSync(path.join(appDir, 'bin/www'), binFile);
 
         // Apply execution permission only on Unix-like systems (Linux/macOS)
-        if (os.platform() !== 'win32') {
-            fs.chmodSync(path.join(appDir, 'bin/www'), 0o755); // Give execution permission on Linux/macOS
-        }
+        // if (os.platform() !== 'win32') {
+        fs.chmodSync(path.join(appDir, 'bin/www'), 0o755); // Give execution permission on Linux/macOS
+
 
         //Success
         console.log(`Scaffolding for "${appname}" is done successfully.`);
