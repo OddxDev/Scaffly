@@ -48,26 +48,26 @@ program
 
     // Create app.js file for ExpressJs setup
     const appJs = `
-      const express = require('express');
-      const app = express();
-      const path = require('path');
-      const port = 3000;
+const express = require('express');
+const app = express();
+const path = require('path');
+const port = 3000;
 
-      // Set the view engine to ejs
-      app.set('view engine', 'ejs');
+// Set the view engine to ejs
+app.set('view engine', 'ejs');
 
-      // Serve the static files (CSS, JS, Images) from the "public" folder
-      app.use(express.static(path.join(__dirname, 'public')));
+// Serve the static files (CSS, JS, Images) from the "public" folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-      // Setup a basic route for the root URL
-      app.get('/', function(req, res) {
-        res.render('index');  // Render the index from view
-      });
+// Setup a basic route for the root URL
+app.get('/', function(req, res) {
+  res.render('index');  // Render the index from view
+});
 
-      // Start the server on Port 3000
-      app.listen(port, function() {
-        console.log("Server started on http://localhost:3000");
-      });
+// Start the server on Port 3000
+app.listen(port, function() {
+  console.log("Server started on http://localhost:3000");
+});
     `;
 
     // Write the app.js file to the project folder
@@ -77,39 +77,39 @@ program
 
     // Create routes for the Homepage (Index route)
     const routesIndex = `
-      const express = require('express');
-      const router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-      // Handle GET requests to the root URL
-      router.get('/', function(req, res) {
-        res.render('index');  // Render index.ejs view
-      });
+// Handle GET requests to the root URL
+router.get('/', function(req, res) {
+  res.render('index');  // Render index.ejs view
+});
 
-      module.exports = router;
+module.exports = router;
     `;
 
     // Create route for Users (Users route)
     const routesUsers = `
-      const express = require('express');
-      const router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-      // Handle GET request to '/users'
-      router.get('/', function(req, res) {
-        res.send('Users Route');  // User route simple response
-      });
+// Handle GET request to '/users'
+router.get('/', function(req, res) {
+  res.send('Users Route');  // User route simple response
+});
 
-      module.exports = router;
+module.exports = router;
     `;
 
     // Writing the routes file to the route folder
-    fs.writeFileSync(path.join(appDir, 'routes/index.js'), routesIndex);
-    fs.writeFileSync(path.join(appDir, 'routes/users.js'), routesUsers);
+    fs.writeFileSync(path.join(appDir, 'routes/index.js'), routesIndex.trim());
+    fs.writeFileSync(path.join(appDir, 'routes/users.js'), routesUsers.trim());
 
     // Creating views folder with a basic index.ejs file with basic HTML boilerplate code
     const indexEJS = `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Welcome</title>

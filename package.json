@@ -1,6 +1,6 @@
 {
   "name": "scaffly",
-  "version": "1.0.8",
+  "version": "2.0.0",
   "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
     "commander": "^13.1.0",
     "express": "^4.21.2",
     "fs-extra": "^11.3.0",
-    "scaffly": "^1.0.2"
+    "scaffly": "^2.0.0"
   },
   "bin": {
     "scaffly": "./cli.js"
