@@ -71,7 +71,7 @@ program
     `;
 
     // Write the app.js file to the project folder
-    fs.writeFileSync(path.join(appDir, 'app.js'), appJs);
+    fs.writeFileSync(path.join(appDir, 'app.js'), appJs.trim());
 
     // Creating routes for handling requests
 
